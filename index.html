@@ -780,41 +780,28 @@
             `;
         }
 
-        // Match editing function - this is where you set winners/losers
-        function editMatch(matchId) {
+        // Match result setting - You can manually set match results here
+        function setMatchResult(matchId, winnerId, game1WinnerId = null, game2WinnerId = null, game3WinnerId = null) {
             const match = matches.find(m => m.id === matchId);
-            if (!match || match.completed || !match.player1 || !match.player2) return;
+            if (!match) return;
             
-            const winner = confirm(`Click OK if ${match.player1.ign} wins, Cancel if ${match.player2.ign} wins`);
-            
-            if (winner) {
-                match.winner = match.player1;
-                match.results = [match.player1.id, match.player1.id, null]; // 2-0 win
-            } else {
-                match.winner = match.player2;
-                match.results = [match.player2.id, match.player2.id, null]; // 2-0 win
-            }
-            
+            const winner = match.player1.id === winnerId ? match.player1 : match.player2;
+            match.winner = winner;
             match.completed = true;
+            match.results = [game1WinnerId, game2WinnerId, game3WinnerId];
             
             // Advance winner to next round
             advanceWinner(match);
             updatePlayerStats(match);
             updateBracketDisplay();
             
-            showNotification(`${match.winner.ign} advances to the next round!`);
-            
+            showNotification(`${winner.ign} wins the match!`);
             checkTournamentComplete();
         }
 
-        function simulateMatch() {
-            const activeMatch = matches.find(m => !m.completed && m.player1 && m.player2);
-            if (activeMatch) {
-                editMatch(activeMatch.id);
-            } else {
-                showNotification('No active matches to simulate!', 'error');
-            }
-        }
+        // Example: To set match results manually, use:
+        // setMatchResult(matchId, winnerId, game1WinnerId, game2WinnerId, game3WinnerId);
+        // Example: setMatchResult(1234567890, 1, 1, 2, 1); // Match ID, Winner ID, Game results
 
         function advanceWinner(completedMatch) {
             const nextRound = completedMatch.round + 1;
