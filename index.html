@@ -76,6 +76,115 @@
             display: block;
         }
 
+        /* Bracket Styles */
+        .bracket-container {
+            overflow-x: auto;
+            padding: 2rem;
+            min-height: 500px;
+        }
+
+        .bracket {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 1000px;
+            gap: 4rem;
+            position: relative;
+        }
+
+        .bracket-round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .bracket-round h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ff6b35;
+            font-size: 1.2rem;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .match {
+            background: #2a2a2a;
+            border-radius: 8px;
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 2px solid #555;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .match-header {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .player-slot {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            background: #1a1a1a;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 50px;
+        }
+
+        .player-slot:hover {
+            background: #333;
+        }
+
+        .player-slot.winner {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            color: white;
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+        }
+
+        .player-slot.loser {
+            background: #6c757d;
+            opacity: 0.7;
+        }
+
+        .player-slot.bye {
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            color: white;
+        }
+
+        .player-slot img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        /* Bracket Connecting Lines */
+        .bracket-line {
+            position: absolute;
+            background: #ff6b35;
+            z-index: 1;
+        }
+
+        .bracket-line.horizontal {
+            height: 2px;
+        }
+
+        .bracket-line.vertical {
+            width: 2px;
+        }
+
+        /* Registration Styles */
         .registration-container {
             max-width: 600px;
             margin: 0 auto;
@@ -143,210 +252,7 @@
             background: #666;
         }
 
-        .btn-success {
-            background: #28a745;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #218838;
-        }
-
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #c82333;
-        }
-
-        .registered-players {
-            background: #2a2a2a;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .player-card {
-            background: #1a1a1a;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid #ff6b35;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .player-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ff6b35;
-        }
-
-        .player-info {
-            flex: 1;
-        }
-
-        .player-ign {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ff6b35;
-        }
-
-        .player-id {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        .bracket-container {
-            overflow-x: auto;
-            padding: 2rem;
-            min-height: 500px;
-        }
-
-        .bracket {
-            display: flex;
-            justify-content: space-between;
-            min-width: 800px;
-            gap: 2rem;
-        }
-
-        .bracket-round {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            min-height: 500px;
-        }
-
-        .bracket-round h3 {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: #ff6b35;
-            font-size: 1.2rem;
-        }
-
-        .match {
-            background: #2a2a2a;
-            border-radius: 8px;
-            margin: 0.5rem 0;
-            padding: 1rem;
-            border: 2px solid #555;
-            min-width: 200px;
-        }
-
-        .match-header {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #ff6b35;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .player-slot {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem;
-            margin: 0.25rem 0;
-            background: #1a1a1a;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .player-slot:hover {
-            background: #333;
-        }
-
-        .player-slot.winner {
-            background: linear-gradient(90deg, #28a745, #20c997);
-            color: white;
-        }
-
-        .player-slot.loser {
-            background: #6c757d;
-            opacity: 0.7;
-        }
-
-        .player-slot.bye {
-            background: linear-gradient(90deg, #ff6b35, #f7931e);
-            color: white;
-        }
-
-        .match-results {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.25rem;
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
-        }
-
-        .game-result {
-            text-align: center;
-            padding: 0.25rem;
-            background: #333;
-            border-radius: 3px;
-        }
-
-        .game-result.win {
-            background: #28a745;
-        }
-
-        .game-result.loss {
-            background: #dc3545;
-        }
-
-        .admin-panel {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .admin-header {
-            background: #2a2a2a;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .admin-sections {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .pending-requests {
-            background: #2a2a2a;
-            padding: 2rem;
-            border-radius: 10px;
-        }
-
-        .request-card {
-            background: #1a1a1a;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 8px;
-            border-left: 4px solid #f7931e;
-        }
-
-        .player-management {
-            background: #2a2a2a;
-            padding: 2rem;
-            border-radius: 10px;
-        }
-
-        .match-editor {
-            background: #2a2a2a;
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-        }
-
+        /* Player Profile Styles */
         .player-profile {
             max-width: 800px;
             margin: 0 auto;
@@ -418,54 +324,64 @@
             margin-bottom: 1rem;
         }
 
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .admin-sections {
-                grid-template-columns: 1fr;
-            }
-            
             .bracket {
-                min-width: 600px;
+                min-width: 800px;
+                gap: 2rem;
             }
             
             .match {
                 min-width: 150px;
+                padding: 0.5rem;
             }
             
             .nav-tabs {
                 justify-content: flex-start;
             }
+
+            .nav-tab {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .bracket-round {
+                min-height: 500px;
+            }
+
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
 
-        .modal-content {
-            background-color: #2a2a2a;
-            margin: 15% auto;
-            padding: 2rem;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-        }
+            .tournament-info {
+                font-size: 1rem;
+            }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+            .bracket {
+                min-width: 600px;
+                gap: 1.5rem;
+            }
 
-        .close:hover {
-            color: #ff6b35;
+            .match {
+                min-width: 120px;
+                padding: 0.5rem;
+            }
+
+            .player-slot {
+                font-size: 0.8rem;
+                padding: 0.25rem;
+            }
+
+            .player-slot img {
+                width: 25px;
+                height: 25px;
+            }
         }
 
         .notification {
@@ -479,6 +395,21 @@
             display: none;
             z-index: 2000;
         }
+
+        /* Winner Display */
+        .tournament-winner {
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .winner-crown {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -491,17 +422,42 @@
     </div>
 
     <div class="nav-tabs">
-        <button class="nav-tab active" onclick="showTab('registration')">Player Registration</button>
+        <button class="nav-tab active" onclick="showTab('bracket')">Tournament Bracket</button>
         <button class="nav-tab" onclick="showTab('profiles')">Player Profiles</button>
-        <button class="nav-tab" onclick="showTab('bracket')">Tournament Bracket</button>
-        <button class="nav-tab" onclick="showTab('admin')">Admin Panel</button>
+        <button class="nav-tab" onclick="showTab('registration')">Player Registration</button>
+    </div>
+
+    <!-- Tournament Bracket Tab -->
+    <div id="bracket" class="tab-content active">
+        <div class="bracket-container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Tournament Bracket</h2>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button onclick="generateBracket()" class="btn btn-primary">Generate/Refresh Bracket</button>
+                <button onclick="simulateMatch()" class="btn btn-secondary">Simulate Next Match</button>
+            </div>
+            <div id="tournamentWinner"></div>
+            <div id="bracketDisplay"></div>
+        </div>
+    </div>
+
+    <!-- Player Profiles Tab -->
+    <div id="profiles" class="tab-content">
+        <div class="player-profile">
+            <h2>Player Profiles</h2>
+            <div id="profileSelect" style="margin-bottom: 2rem;">
+                <select id="playerSelect" onchange="showPlayerProfile()" style="width: 100%; max-width: 400px; padding: 0.75rem; background: #1a1a1a; color: white; border: 2px solid #555; border-radius: 5px;">
+                    <option value="">Select a player...</option>
+                </select>
+            </div>
+            <div id="playerProfileDisplay"></div>
+        </div>
     </div>
 
     <!-- Player Registration Tab -->
-    <div id="registration" class="tab-content active">
+    <div id="registration" class="tab-content">
         <div class="registration-container">
             <h2>Join Tournament</h2>
-            <p style="margin-bottom: 1.5rem; color: #ccc;">Register for the tournament. Your registration will be reviewed by the admin before approval.</p>
+            <p style="margin-bottom: 1.5rem; color: #ccc;">Register for the tournament. Your registration request will be saved and downloaded for admin review.</p>
             <form id="playerForm">
                 <div class="form-group">
                     <label for="playerIGN">In-Game Name (IGN)</label>
@@ -522,95 +478,8 @@
         <div id="registrationSuccess" class="registration-success" style="display: none;">
             <div class="success-icon">✅</div>
             <h2>Registration Submitted!</h2>
-            <p>Your registration request has been submitted successfully. Please wait for admin approval.</p>
+            <p>Your registration request has been downloaded. Please send this file to the tournament admin for approval.</p>
             <button onclick="resetRegistrationForm()" class="btn btn-secondary">Register Another Player</button>
-        </div>
-    </div>
-
-    <!-- Player Profiles Tab -->
-    <div id="profiles" class="tab-content">
-        <div class="player-profile">
-            <h2>Player Profiles</h2>
-            <div id="profileSelect" style="margin-bottom: 2rem;">
-                <select id="playerSelect" onchange="showPlayerProfile()" style="width: 100%; max-width: 400px; padding: 0.75rem; background: #1a1a1a; color: white; border: 2px solid #555; border-radius: 5px;">
-                    <option value="">Select a player...</option>
-                </select>
-            </div>
-            <div id="playerProfileDisplay"></div>
-        </div>
-    </div>
-
-    <!-- Tournament Bracket Tab -->
-    <div id="bracket" class="tab-content">
-        <div class="bracket-container">
-            <h2 style="text-align: center; margin-bottom: 2rem;">Tournament Bracket</h2>
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <button onclick="generateBracket()" class="btn btn-primary">Generate/Refresh Bracket</button>
-            </div>
-            <div id="bracketDisplay"></div>
-        </div>
-    </div>
-
-    <!-- Admin Panel Tab -->
-    <div id="admin" class="tab-content">
-        <div class="admin-panel">
-            <div class="admin-header">
-                <h2>🔐 Admin Panel</h2>
-                <p>Manage tournament registrations, players, and match results</p>
-            </div>
-            
-            <div class="admin-sections">
-                <div class="pending-requests">
-                    <h3>📋 Pending Registration Requests</h3>
-                    <div id="pendingRequests"></div>
-                    <button onclick="checkForRequests()" class="btn btn-secondary">Refresh Requests</button>
-                </div>
-                
-                <div class="player-management">
-                    <h3>👥 Approved Players (<span id="playerCount">0</span>)</h3>
-                    <div id="approvedPlayersList"></div>
-                </div>
-            </div>
-            
-            <div id="adminMatches"></div>
-            
-            <div style="text-align: center; margin-top: 2rem;">
-                <button onclick="exportData()" class="btn btn-secondary">Export Tournament Data</button>
-                <button onclick="resetTournament()" class="btn btn-danger">Reset All Data</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Match Editor Modal -->
-    <div id="matchModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeMatchModal()">&times;</span>
-            <h2>Edit Match Results</h2>
-            <div id="matchEditor"></div>
-        </div>
-    </div>
-
-    <!-- Add Player Modal -->
-    <div id="addPlayerModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAddPlayerModal()">&times;</span>
-            <h2>Add Player Manually</h2>
-            <div id="addPlayerForm">
-                <div class="form-group">
-                    <label for="manualIGN">In-Game Name (IGN)</label>
-                    <input type="text" id="manualIGN" placeholder="Player IGN" required>
-                </div>
-                <div class="form-group">
-                    <label for="manualCharId">Character ID</label>
-                    <input type="text" id="manualCharId" placeholder="Character ID" required>
-                </div>
-                <div class="form-group">
-                    <label for="manualPhoto">Profile Photo URL</label>
-                    <input type="url" id="manualPhoto" placeholder="https://example.com/photo.jpg">
-                </div>
-                <button onclick="addPlayerManually()" class="btn btn-primary">Add Player</button>
-                <button onclick="closeAddPlayerModal()" class="btn btn-secondary">Cancel</button>
-            </div>
         </div>
     </div>
 
@@ -621,39 +490,94 @@
         let players = [];
         let matches = [];
         let bracket = [];
-        let currentEditMatch = null;
-        let registrationRequests = [];
 
-        // Load data from localStorage on page load
-        window.onload = function() {
-            loadData();
-        };
-
-        function loadData() {
-            const savedPlayers = localStorage.getItem('pubgPlayers');
-            const savedMatches = localStorage.getItem('pubgMatches');
-            const savedRequests = localStorage.getItem('pubgRegistrationRequests');
-            
-            if (savedPlayers) {
-                players = JSON.parse(savedPlayers);
-                updatePlayersDisplay();
-                updateProfileSelect();
+        // Sample players data (you can uncomment and modify these to add players)
+        /*
+        const samplePlayers = [
+            {
+                id: 1,
+                ign: "ProGamer123",
+                characterId: "123456789",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
+            },
+            {
+                id: 2,
+                ign: "SnipeKing",
+                characterId: "987654321",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
+            },
+            {
+                id: 3,
+                ign: "HeadHunter",
+                characterId: "456789123",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
+            },
+            {
+                id: 4,
+                ign: "BattleRoyale",
+                characterId: "789123456",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
+            },
+            {
+                id: 5,
+                ign: "GunMaster",
+                characterId: "321654987",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
+            },
+            {
+                id: 6,
+                ign: "AcePilot",
+                characterId: "654987321",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
+            },
+            {
+                id: 7,
+                ign: "StealthMode",
+                characterId: "147258369",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
+            },
+            {
+                id: 8,
+                ign: "WinnerChicken",
+                characterId: "963852741",
+                photo: "https://via.placeholder.com/150",
+                registeredAt: new Date().toISOString(),
+                stats: { tournamentsPlayed: 0, tournamentsWon: 0, matchesWon: 0, matchesLost: 0, winRate: 0 },
+                matchHistory: []
             }
-            if (savedMatches) {
-                matches = JSON.parse(savedMatches);
+        ];
+        */
+
+        // To add players, uncomment the line below and modify the samplePlayers array above
+        // players = samplePlayers;
+
+        window.onload = function() {
+            updateProfileSelect();
+            if (players.length > 0) {
                 generateBracket();
             }
-            if (savedRequests) {
-                registrationRequests = JSON.parse(savedRequests);
-                updatePendingRequests();
-            }
-        }
-
-        function saveData() {
-            localStorage.setItem('pubgPlayers', JSON.stringify(players));
-            localStorage.setItem('pubgMatches', JSON.stringify(matches));
-            localStorage.setItem('pubgRegistrationRequests', JSON.stringify(registrationRequests));
-        }
+        };
 
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
@@ -666,20 +590,17 @@
         }
 
         function showTab(tabName) {
-            // Hide all tab contents
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
             
-            // Remove active class from all nav tabs
             const navTabs = document.querySelectorAll('.nav-tab');
             navTabs.forEach(tab => tab.classList.remove('active'));
             
-            // Show selected tab
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
         }
 
-        // Player Registration - Now creates request instead of direct registration
+        // Player Registration - Downloads registration file
         document.getElementById('playerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -687,64 +608,33 @@
             const characterId = document.getElementById('characterId').value;
             const photoUrl = document.getElementById('profilePhoto').value || 'https://via.placeholder.com/150';
             
-            // Check if request already exists
-            if (registrationRequests.find(r => r.ign === ign || r.characterId === characterId)) {
-                showNotification('Registration request with this IGN or Character ID already exists!', 'error');
-                return;
-            }
-            
-            // Check if player already approved
-            if (players.find(p => p.ign === ign || p.characterId === characterId)) {
-                showNotification('Player with this IGN or Character ID already registered!', 'error');
-                return;
-            }
-            
             const request = {
-                id: Date.now(),
-                ign: ign,
-                characterId: characterId,
-                photo: photoUrl,
-                submittedAt: new Date().toISOString(),
-                status: 'pending'
+                type: 'registration_request',
+                timestamp: new Date().toISOString(),
+                player: {
+                    ign: ign,
+                    characterId: characterId,
+                    photo: photoUrl,
+                    requestedAt: new Date().toISOString()
+                },
+                instructions: 'Admin: Add this player to your tournament by copying the player object to your players array and assigning a unique ID.'
             };
             
-            registrationRequests.push(request);
+            // Create downloadable file
+            const dataStr = JSON.stringify(request, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
             
-            // Create registration request file for admin
-            createRegistrationFile(request);
-            
-            saveData();
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `registration-request-${ign}-${Date.now()}.json`;
+            link.click();
             
             // Show success message
             document.querySelector('.registration-container').style.display = 'none';
             document.getElementById('registrationSuccess').style.display = 'block';
             
-            showNotification('Registration request submitted successfully!');
+            showNotification('Registration request downloaded successfully!');
         });
-
-        function createRegistrationFile(request) {
-            // Create a downloadable file with registration data
-            const requestData = {
-                type: 'registration_request',
-                timestamp: new Date().toISOString(),
-                data: request,
-                message: `New registration request from ${request.ign} (ID: ${request.characterId})`
-            };
-            
-            // For demonstration - in real implementation, this would go to your server
-            console.log('Registration Request Created:', requestData);
-            
-            // You can also create a downloadable file
-            const dataStr = JSON.stringify(requestData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            
-            // Save to downloads folder (this would be handled server-side in real implementation)
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = `registration-request-${request.id}.json`;
-            // Uncomment the next line if you want to auto-download the file
-            // link.click();
-        }
 
         function resetRegistrationForm() {
             document.querySelector('.registration-container').style.display = 'block';
@@ -752,180 +642,7 @@
             document.getElementById('playerForm').reset();
         }
 
-        // Admin Panel Functions
-        function checkForRequests() {
-            // In real implementation, this would fetch from server
-            // For now, it just refreshes the display
-            updatePendingRequests();
-            showNotification('Requests refreshed');
-        }
-
-        function updatePendingRequests() {
-            const container = document.getElementById('pendingRequests');
-            const pendingRequests = registrationRequests.filter(r => r.status === 'pending');
-            
-            if (pendingRequests.length === 0) {
-                container.innerHTML = '<p style="color: #666; text-align: center;">No pending requests</p>';
-                return;
-            }
-            
-            container.innerHTML = pendingRequests.map(request => `
-                <div class="request-card">
-                    <div style="display: flex; justify-content: between; align-items: center; gap: 1rem;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: bold; color: #ff6b35;">${request.ign}</div>
-                            <div style="color: #ccc; font-size: 0.9rem;">ID: ${request.characterId}</div>
-                            <div style="color: #999; font-size: 0.8rem;">${new Date(request.submittedAt).toLocaleString()}</div>
-                        </div>
-                        <div>
-                            <button onclick="approveRequest(${request.id})" class="btn btn-success" style="font-size: 0.8rem; padding: 0.5rem;">Approve</button>
-                            <button onclick="rejectRequest(${request.id})" class="btn btn-danger" style="font-size: 0.8rem; padding: 0.5rem;">Reject</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function approveRequest(requestId) {
-            const request = registrationRequests.find(r => r.id === requestId);
-            if (!request) return;
-            
-            // Create player from request
-            const player = {
-                id: Date.now(),
-                ign: request.ign,
-                characterId: request.characterId,
-                photo: request.photo,
-                registeredAt: new Date().toISOString(),
-                approvedAt: new Date().toISOString(),
-                stats: {
-                    tournamentsPlayed: 0,
-                    tournamentsWon: 0,
-                    matchesWon: 0,
-                    matchesLost: 0,
-                    winRate: 0
-                },
-                matchHistory: []
-            };
-            
-            players.push(player);
-            
-            // Mark request as approved
-            request.status = 'approved';
-            request.approvedAt = new Date().toISOString();
-            
-            saveData();
-            updatePlayersDisplay();
-            updatePendingRequests();
-            updateProfileSelect();
-            
-            showNotification(`Player ${request.ign} approved successfully!`);
-        }
-
-        function rejectRequest(requestId) {
-            const request = registrationRequests.find(r => r.id === requestId);
-            if (!request) return;
-            
-            if (confirm(`Are you sure you want to reject ${request.ign}'s registration?`)) {
-                request.status = 'rejected';
-                request.rejectedAt = new Date().toISOString();
-                
-                saveData();
-                updatePendingRequests();
-                
-                showNotification(`Registration request from ${request.ign} rejected.`);
-            }
-        }
-
-        function removePlayer(playerId) {
-            if (confirm('Are you sure you want to remove this player? This will affect ongoing tournaments.')) {
-                players = players.filter(p => p.id !== playerId);
-                saveData();
-                updatePlayersDisplay();
-                updateProfileSelect();
-                showNotification('Player removed successfully');
-            }
-        }
-
-        function updatePlayersDisplay() {
-            const approvedList = document.getElementById('approvedPlayersList');
-            const playerCount = document.getElementById('playerCount');
-            
-            playerCount.textContent = players.length;
-            
-            if (players.length === 0) {
-                approvedList.innerHTML = '<p style="text-align: center; color: #666;">No approved players yet.</p>';
-                return;
-            }
-            
-            approvedList.innerHTML = players.map(player => `
-                <div class="player-card">
-                    <img src="${player.photo}" alt="${player.ign}" class="player-avatar" onerror="this.src='https://via.placeholder.com/60'">
-                    <div class="player-info">
-                        <div class="player-ign">${player.ign}</div>
-                        <div class="player-id">ID: ${player.characterId}</div>
-                        <div style="font-size: 0.8rem; color: #999;">Approved: ${new Date(player.approvedAt || player.registeredAt).toLocaleDateString()}</div>
-                    </div>
-                    <button onclick="removePlayer(${player.id})" class="btn btn-danger" style="font-size: 0.8rem; padding: 0.5rem;">Remove</button>
-                </div>
-            `).join('');
-        }
-
-        // Add manual player function for admin
-        function openAddPlayerModal() {
-            document.getElementById('addPlayerModal').style.display = 'block';
-        }
-
-        function closeAddPlayerModal() {
-            document.getElementById('addPlayerModal').style.display = 'none';
-            document.getElementById('manualIGN').value = '';
-            document.getElementById('manualCharId').value = '';
-            document.getElementById('manualPhoto').value = '';
-        }
-
-        function addPlayerManually() {
-            const ign = document.getElementById('manualIGN').value;
-            const characterId = document.getElementById('manualCharId').value;
-            const photoUrl = document.getElementById('manualPhoto').value || 'https://via.placeholder.com/150';
-            
-            if (!ign || !characterId) {
-                showNotification('Please fill in all required fields', 'error');
-                return;
-            }
-            
-            // Check if player already exists
-            if (players.find(p => p.ign === ign || p.characterId === characterId)) {
-                showNotification('Player with this IGN or Character ID already exists!', 'error');
-                return;
-            }
-            
-            const player = {
-                id: Date.now(),
-                ign: ign,
-                characterId: characterId,
-                photo: photoUrl,
-                registeredAt: new Date().toISOString(),
-                addedManually: true,
-                stats: {
-                    tournamentsPlayed: 0,
-                    tournamentsWon: 0,
-                    matchesWon: 0,
-                    matchesLost: 0,
-                    winRate: 0
-                },
-                matchHistory: []
-            };
-            
-            players.push(player);
-            saveData();
-            updatePlayersDisplay();
-            updateProfileSelect();
-            closeAddPlayerModal();
-            
-            showNotification(`Player ${ign} added successfully!`);
-        }
-
-        // Bracket Generation
+        // Bracket Generation with proper connecting lines
         function generateBracket() {
             if (players.length < 2) {
                 showNotification('Need at least 2 players to generate bracket!', 'error');
@@ -935,10 +652,7 @@
             matches = [];
             bracket = [];
             
-            // Shuffle players for random seeding
             const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
-            
-            // Calculate rounds needed
             const totalPlayers = shuffledPlayers.length;
             const rounds = Math.ceil(Math.log2(totalPlayers));
             
@@ -961,12 +675,11 @@
                     player1: player1 || null,
                     player2: player2 || null,
                     winner: null,
-                    results: [null, null, null], // Best of 3
+                    results: [null, null, null],
                     completed: false,
                     isBye: !player2
                 };
                 
-                // If it's a bye, automatically advance the player
                 if (!player2) {
                     match.winner = player1;
                     match.completed = true;
@@ -999,49 +712,64 @@
                 }
             }
             
-            saveData();
             updateBracketDisplay();
-            updateAdminMatches();
             showNotification('Bracket generated successfully!');
         }
 
         function updateBracketDisplay() {
             const bracketDisplay = document.getElementById('bracketDisplay');
+            const winnerDisplay = document.getElementById('tournamentWinner');
             
             if (bracket.length === 0) {
-                bracketDisplay.innerHTML = '<p style="text-align: center;">Generate bracket first by adding approved players.</p>';
+                bracketDisplay.innerHTML = '<p style="text-align: center;">Generate bracket first by adding players to the code.</p>';
                 return;
             }
             
-            const roundNames = ['First Round', 'Quarter Finals', 'Semi Finals', 'Finals', 'Winner'];
+            const roundNames = ['First Round', 'Quarter Finals', 'Semi Finals', 'Finals'];
+            
+            // Check for tournament winner
+            const finalMatch = bracket[bracket.length - 1][0];
+            if (finalMatch && finalMatch.completed && finalMatch.winner) {
+                winnerDisplay.innerHTML = `
+                    <div class="tournament-winner">
+                        <div class="winner-crown">👑</div>
+                        <h2>Tournament Champion</h2>
+                        <img src="${finalMatch.winner.photo}" alt="${finalMatch.winner.ign}" style="width: 100px; height: 100px; border-radius: 50%; margin: 1rem;" onerror="this.src='https://via.placeholder.com/100'">
+                        <h3>${finalMatch.winner.ign}</h3>
+                        <p>Congratulations!</p>
+                    </div>
+                `;
+            } else {
+                winnerDisplay.innerHTML = '';
+            }
             
             bracketDisplay.innerHTML = `
                 <div class="bracket">
                     ${bracket.map((round, roundIndex) => `
-                        <div class="bracket-round">
+                        <div class="bracket-round" data-round="${roundIndex}">
                             <h3>${roundNames[roundIndex] || `Round ${roundIndex + 1}`}</h3>
-                            ${round.map(match => `
-                                <div class="match">
+                            ${round.map((match, matchIndex) => `
+                                <div class="match" data-match="${match.id}" onclick="editMatch(${match.id})">
                                     <div class="match-header">Match ${match.matchNumber}</div>
                                     ${match.player1 ? `
                                         <div class="player-slot ${match.winner && match.winner.id === match.player1.id ? 'winner' : match.completed ? 'loser' : ''} ${match.isBye ? 'bye' : ''}">
-                                            <img src="${match.player1.photo}" alt="${match.player1.ign}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 0.5rem;" onerror="this.src='https://via.placeholder.com/30'">
+                                            <img src="${match.player1.photo}" alt="${match.player1.ign}" onerror="this.src='https://via.placeholder.com/30'">
                                             ${match.player1.ign}
                                         </div>
                                     ` : '<div class="player-slot">TBD</div>'}
                                     
                                     ${match.player2 ? `
                                         <div class="player-slot ${match.winner && match.winner.id === match.player2.id ? 'winner' : match.completed ? 'loser' : ''}">
-                                            <img src="${match.player2.photo}" alt="${match.player2.ign}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 0.5rem;" onerror="this.src='https://via.placeholder.com/30'">
+                                            <img src="${match.player2.photo}" alt="${match.player2.ign}" onerror="this.src='https://via.placeholder.com/30'">
                                             ${match.player2.ign}
                                         </div>
                                     ` : match.isBye ? '<div class="player-slot bye">BYE</div>' : '<div class="player-slot">TBD</div>'}
                                     
                                     ${match.completed && !match.isBye ? `
-                                        <div class="match-results">
+                                        <div style="margin-top: 0.5rem; text-align: center; font-size: 0.8rem;">
                                             ${match.results.map((result, gameIndex) => 
-                                                result ? `<div class="game-result ${result == match.winner.id ? 'win' : 'loss'}">G${gameIndex + 1}</div>` : '<div class="game-result">-</div>'
-                                            ).join('')}
+                                                result ? `<span style="color: ${result == match.winner.id ? '#28a745' : '#dc3545'};">G${gameIndex + 1}</span>` : '<span>-</span>'
+                                            ).join(' | ')}
                                         </div>
                                     ` : ''}
                                 </div>
@@ -1052,114 +780,40 @@
             `;
         }
 
-        // Admin Match Management
-        function updateAdminMatches() {
-            const adminMatches = document.getElementById('adminMatches');
-            const incompleteMatches = matches.filter(m => !m.completed && m.player1 && m.player2);
+        // Match editing function - this is where you set winners/losers
+        function editMatch(matchId) {
+            const match = matches.find(m => m.id === matchId);
+            if (!match || match.completed || !match.player1 || !match.player2) return;
             
-            if (incompleteMatches.length === 0) {
-                adminMatches.innerHTML = '<div style="background: #2a2a2a; padding: 2rem; border-radius: 10px; text-align: center;"><p>No active matches to manage.</p><button onclick="openAddPlayerModal()" class="btn btn-primary">Add Player Manually</button></div>';
-                return;
-            }
+            const winner = confirm(`Click OK if ${match.player1.ign} wins, Cancel if ${match.player2.ign} wins`);
             
-            adminMatches.innerHTML = `
-                <h3 style="margin: 2rem 0 1rem 0;">🎯 Active Matches</h3>
-                ${incompleteMatches.map(match => `
-                    <div class="match-editor">
-                        <h3>Round ${match.round + 1} - Match ${match.matchNumber}</h3>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0;">
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <img src="${match.player1.photo}" alt="${match.player1.ign}" style="width: 40px; height: 40px; border-radius: 50%;" onerror="this.src='https://via.placeholder.com/40'">
-                                <span>${match.player1.ign}</span>
-                            </div>
-                            <span style="font-size: 1.5rem; color: #ff6b35;">VS</span>
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <span>${match.player2.ign}</span>
-                                <img src="${match.player2.photo}" alt="${match.player2.ign}" style="width: 40px; height: 40px; border-radius: 50%;" onerror="this.src='https://via.placeholder.com/40'">
-                            </div>
-                        </div>
-                        <button onclick="openMatchModal(${match.id})" class="btn btn-primary">Edit Results</button>
-                    </div>
-                `).join('')}
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button onclick="openAddPlayerModal()" class="btn btn-secondary">Add Player Manually</button>
-                </div>
-            `;
-        }
-
-        function openMatchModal(matchId) {
-            currentEditMatch = matches.find(m => m.id === matchId);
-            const modal = document.getElementById('matchModal');
-            const editor = document.getElementById('matchEditor');
-            
-            editor.innerHTML = `
-                <h3>${currentEditMatch.player1.ign} vs ${currentEditMatch.player2.ign}</h3>
-                <div style="margin: 1rem 0;">
-                    <h4>Best of 3 Results:</h4>
-                    ${[1, 2, 3].map(game => `
-                        <div style="margin: 0.5rem 0;">
-                            <label>Game ${game} Winner:</label>
-                            <select id="game${game}Winner" style="margin-left: 1rem; width: 200px; padding: 0.5rem; background: #1a1a1a; color: white; border: 1px solid #555; border-radius: 3px;">
-                                <option value="">Not Played</option>
-                                <option value="${currentEditMatch.player1.id}" ${currentEditMatch.results[game-1] == currentEditMatch.player1.id ? 'selected' : ''}>${currentEditMatch.player1.ign}</option>
-                                <option value="${currentEditMatch.player2.id}" ${currentEditMatch.results[game-1] == currentEditMatch.player2.id ? 'selected' : ''}>${currentEditMatch.player2.ign}</option>
-                            </select>
-                        </div>
-                    `).join('')}
-                </div>
-                <button onclick="saveMatchResults()" class="btn btn-primary">Save Results</button>
-                <button onclick="closeMatchModal()" class="btn btn-secondary">Cancel</button>
-            `;
-            
-            modal.style.display = 'block';
-        }
-
-        function closeMatchModal() {
-            document.getElementById('matchModal').style.display = 'none';
-            currentEditMatch = null;
-        }
-
-        function saveMatchResults() {
-            const game1Winner = document.getElementById('game1Winner').value;
-            const game2Winner = document.getElementById('game2Winner').value;
-            const game3Winner = document.getElementById('game3Winner').value;
-            
-            currentEditMatch.results = [
-                game1Winner || null,
-                game2Winner || null,
-                game3Winner || null
-            ];
-            
-            // Determine overall winner (best of 3)
-            const player1Wins = currentEditMatch.results.filter(r => r == currentEditMatch.player1.id).length;
-            const player2Wins = currentEditMatch.results.filter(r => r == currentEditMatch.player2.id).length;
-            
-            if (player1Wins >= 2) {
-                currentEditMatch.winner = currentEditMatch.player1;
-                currentEditMatch.completed = true;
-            } else if (player2Wins >= 2) {
-                currentEditMatch.winner = currentEditMatch.player2;
-                currentEditMatch.completed = true;
+            if (winner) {
+                match.winner = match.player1;
+                match.results = [match.player1.id, match.player1.id, null]; // 2-0 win
             } else {
-                currentEditMatch.winner = null;
-                currentEditMatch.completed = false;
+                match.winner = match.player2;
+                match.results = [match.player2.id, match.player2.id, null]; // 2-0 win
             }
             
-            // If match is completed, advance winner to next round
-            if (currentEditMatch.completed) {
-                advanceWinner(currentEditMatch);
-                updatePlayerStats(currentEditMatch);
-            }
+            match.completed = true;
             
-            saveData();
+            // Advance winner to next round
+            advanceWinner(match);
+            updatePlayerStats(match);
             updateBracketDisplay();
-            updateAdminMatches();
-            closeMatchModal();
             
-            showNotification('Match results saved successfully!');
+            showNotification(`${match.winner.ign} advances to the next round!`);
             
-            // Check if tournament is complete
             checkTournamentComplete();
+        }
+
+        function simulateMatch() {
+            const activeMatch = matches.find(m => !m.completed && m.player1 && m.player2);
+            if (activeMatch) {
+                editMatch(activeMatch.id);
+            } else {
+                showNotification('No active matches to simulate!', 'error');
+            }
         }
 
         function advanceWinner(completedMatch) {
@@ -1169,7 +823,6 @@
             if (bracket[nextRound] && bracket[nextRound][nextMatchIndex]) {
                 const nextMatch = bracket[nextRound][nextMatchIndex];
                 
-                // Determine if winner goes to player1 or player2 slot
                 if ((completedMatch.matchNumber - 1) % 2 === 0) {
                     nextMatch.player1 = completedMatch.winner;
                 } else {
@@ -1182,7 +835,6 @@
             const winner = completedMatch.winner;
             const loser = completedMatch.player1.id === winner.id ? completedMatch.player2 : completedMatch.player1;
             
-            // Update winner stats
             const winnerData = players.find(p => p.id === winner.id);
             if (winnerData) {
                 winnerData.stats.matchesWon++;
@@ -1197,7 +849,6 @@
                 winnerData.stats.winRate = Math.round((winnerData.stats.matchesWon / (winnerData.stats.matchesWon + winnerData.stats.matchesLost)) * 100);
             }
             
-            // Update loser stats
             const loserData = players.find(p => p.id === loser.id);
             if (loserData) {
                 loserData.stats.matchesLost++;
@@ -1216,22 +867,20 @@
         function checkTournamentComplete() {
             const finalMatch = bracket[bracket.length - 1][0];
             if (finalMatch && finalMatch.completed) {
-                // Tournament is complete
                 const champion = finalMatch.winner;
                 const championData = players.find(p => p.id === champion.id);
                 if (championData) {
                     championData.stats.tournamentsWon++;
                 }
                 
-                // Update all players' tournaments played
                 players.forEach(player => {
                     if (player.matchHistory.some(h => h.tournament === document.getElementById('tournamentName').textContent)) {
                         player.stats.tournamentsPlayed++;
                     }
                 });
                 
-                alert(`🏆 Tournament Complete! Champion: ${champion.ign} 🏆`);
-                saveData();
+                showNotification(`🏆 Tournament Complete! Champion: ${champion.ign} 🏆`);
+                updateBracketDisplay();
             }
         }
 
@@ -1258,7 +907,6 @@
                     <h2>${player.ign}</h2>
                     <p>Character ID: ${player.characterId}</p>
                     <p>Registered: ${new Date(player.registeredAt).toLocaleDateString()}</p>
-                    ${player.addedManually ? '<p style="color: #f7931e;">Added by Admin</p>' : ''}
                 </div>
                 
                 <div class="profile-stats">
@@ -1310,67 +958,6 @@
                     }
                 </div>
             `;
-        }
-
-        // Utility Functions
-        function resetTournament() {
-            if (confirm('Are you sure you want to reset ALL tournament data? This includes players, matches, and registration requests. This cannot be undone.')) {
-                players = [];
-                matches = [];
-                bracket = [];
-                registrationRequests = [];
-                
-                localStorage.removeItem('pubgPlayers');
-                localStorage.removeItem('pubgMatches');
-                localStorage.removeItem('pubgRegistrationRequests');
-                
-                // Reset displays
-                updatePlayersDisplay();
-                updateProfileSelect();
-                updatePendingRequests();
-                document.getElementById('bracketDisplay').innerHTML = '';
-                document.getElementById('adminMatches').innerHTML = '';
-                document.getElementById('playerProfileDisplay').innerHTML = '';
-                
-                showNotification('All tournament data reset successfully!');
-            }
-        }
-
-        function exportData() {
-            const data = {
-                players: players,
-                matches: matches,
-                bracket: bracket,
-                registrationRequests: registrationRequests,
-                tournament: {
-                    name: document.getElementById('tournamentName').textContent,
-                    weapon: document.getElementById('weaponName').textContent
-                },
-                exportDate: new Date().toISOString()
-            };
-            
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = `pubg-tournament-${data.tournament.name.replace(/\s+/g, '-')}-${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            
-            showNotification('Tournament data exported successfully!');
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const matchModal = document.getElementById('matchModal');
-            const addPlayerModal = document.getElementById('addPlayerModal');
-            
-            if (event.target === matchModal) {
-                closeMatchModal();
-            }
-            if (event.target === addPlayerModal) {
-                closeAddPlayerModal();
-            }
         }
     </script>
 </body>
