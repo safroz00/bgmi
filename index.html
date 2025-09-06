@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG Mobile Tournament Bracket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #ff6b35 0%, #f7931e 100%);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #333;
+            border-bottom: 3px solid #ff6b35;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #ccc;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-tab.active {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .nav-tab:hover {
+            background: #555;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            min-height: calc(100vh - 140px);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tournament-setup {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #555;
+            border-radius: 5px;
+            background: #1a1a1a;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #ff6b35;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: #555;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #666;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .player-registration {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .registration-form {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .registered-players {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .player-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .player-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff6b35;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-ign {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .player-id {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .bracket-container {
+            overflow-x: auto;
+            padding: 2rem;
+            min-height: 500px;
+        }
+
+        .bracket {
+            display: flex;
+            justify-content: space-between;
+            min-width: 800px;
+            gap: 2rem;
+        }
+
+        .bracket-round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-height: 500px;
+        }
+
+        .bracket-round h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #ff6b35;
+            font-size: 1.2rem;
+        }
+
+        .match {
+            background: #2a2a2a;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border: 2px solid #555;
+            min-width: 200px;
+        }
+
+        .match-header {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .player-slot {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            background: #1a1a1a;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .player-slot:hover {
+            background: #333;
+        }
+
+        .player-slot.winner {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .player-slot.loser {
+            background: #6c757d;
+            opacity: 0.7;
+        }
+
+        .player-slot.bye {
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            color: white;
+        }
+
+        .match-results {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .game-result {
+            text-align: center;
+            padding: 0.25rem;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .game-result.win {
+            background: #28a745;
+        }
+
+        .game-result.loss {
+            background: #dc3545;
+        }
+
+        .admin-panel {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tournament-info {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            text-align: center;
+        }
+
+        .info-card h3 {
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        .match-editor {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .player-profile {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #2a2a2a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .match-history {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .history-item {
+            background: #1a1a1a;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        @media (max-width: 768px) {
+            .player-registration {
+                grid-template-columns: 1fr;
+            }
+            
+            .bracket {
+                min-width: 600px;
+            }
+            
+            .match {
+                min-width: 150px;
+            }
+            
+            .tournament-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #2a2a2a;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ff6b35;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 PUBG Mobile Tournament Bracket 🏆</h1>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('setup')">Tournament Setup</button>
+        <button class="nav-tab" onclick="showTab('registration')">Player Registration</button>
+        <button class="nav-tab" onclick="showTab('bracket')">Tournament Bracket</button>
+        <button class="nav-tab" onclick="showTab('admin')">Admin Panel</button>
+        <button class="nav-tab" onclick="showTab('profiles')">Player Profiles</button>
+    </div>
+
+    <!-- Tournament Setup Tab -->
+    <div id="setup" class="tab-content active">
+        <div class="tournament-setup">
+            <h2>Create New Tournament</h2>
+            <form id="tournamentForm">
+                <div class="form-group">
+                    <label for="tournamentName">Tournament Name</label>
+                    <input type="text" id="tournamentName" placeholder="e.g., PUBG Solo Championship" required>
+                </div>
+                <div class="form-group">
+                    <label for="weaponType">Weapon Type</label>
+                    <input type="text" id="weaponType" placeholder="e.g., AKM, M416, Kar98k" required>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="3" placeholder="Tournament rules and details..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Tournament</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Player Registration Tab -->
+    <div id="registration" class="tab-content">
+        <div class="player-registration">
+            <div class="registration-form">
+                <h2>Player Registration</h2>
+                <form id="playerForm">
+                    <div class="form-group">
+                        <label for="playerIGN">In-Game Name (IGN)</label>
+                        <input type="text" id="playerIGN" placeholder="Your PUBG Mobile IGN" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="characterId">Character ID</label>
+                        <input type="text" id="characterId" placeholder="Your Character ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePhoto">Profile Photo URL</label>
+                        <input type="url" id="profilePhoto" placeholder="https://example.com/photo.jpg">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+            <div class="registered-players">
+                <h2>Registered Players</h2>
+                <div id="playersList"></div>
+                <button onclick="generateBracket()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Generate Bracket</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tournament Bracket Tab -->
+    <div id="bracket" class="tab-content">
+        <div class="bracket-container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Tournament Bracket</h2>
+            <div id="bracketDisplay"></div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Tab -->
+    <div id="admin" class="tab-content">
+        <div class="admin-panel">
+            <h2>Admin Panel</h2>
+            <div class="tournament-info">
+                <div class="info-card">
+                    <h3>Tournament</h3>
+                    <div id="tournamentNameDisplay">Not Created</div>
+                </div>
+                <div class="info-card">
+                    <h3>Weapon</h3>
+                    <div id="weaponTypeDisplay">-</div>
+                </div>
+                <div class="info-card">
+                    <h3>Players</h3>
+                    <div id="playerCountDisplay">0</div>
+                </div>
+                <div class="info-card">
+                    <h3>Status</h3>
+                    <div id="tournamentStatusDisplay">Setup</div>
+                </div>
+            </div>
+            <div id="adminMatches"></div>
+            <button onclick="resetTournament()" class="btn btn-danger">Reset Tournament</button>
+            <button onclick="exportData()" class="btn btn-secondary">Export Data</button>
+        </div>
+    </div>
+
+    <!-- Player Profiles Tab -->
+    <div id="profiles" class="tab-content">
+        <div class="player-profile">
+            <h2>Player Profiles</h2>
+            <div id="profileSelect">
+                <select id="playerSelect" onchange="showPlayerProfile()">
+                    <option value="">Select a player...</option>
+                </select>
+            </div>
+            <div id="playerProfileDisplay"></div>
+        </div>
+    </div>
+
+    <!-- Match Editor Modal -->
+    <div id="matchModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMatchModal()">&times;</span>
+            <h2>Edit Match Results</h2>
+            <div id="matchEditor"></div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let tournament = null;
+        let players = [];
+        let matches = [];
+        let bracket = [];
+        let currentEditMatch = null;
+
+        // Load data from localStorage on page load
+        window.onload = function() {
+            loadData();
+        };
+
+        function loadData() {
+            const savedTournament = localStorage.getItem('pubgTournament');
+            const savedPlayers = localStorage.getItem('pubgPlayers');
+            const savedMatches = localStorage.getItem('pubgMatches');
+            
+            if (savedTournament) {
+                tournament = JSON.parse(savedTournament);
+                updateTournamentDisplay();
+            }
+            if (savedPlayers) {
+                players = JSON.parse(savedPlayers);
+                updatePlayersDisplay();
+                updateProfileSelect();
+            }
+            if (savedMatches) {
+                matches = JSON.parse(savedMatches);
+                generateBracket();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('pubgTournament', JSON.stringify(tournament));
+            localStorage.setItem('pubgPlayers', JSON.stringify(players));
+            localStorage.setItem('pubgMatches', JSON.stringify(matches));
+        }
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Tournament Setup
+        document.getElementById('tournamentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            tournament = {
+                name: document.getElementById('tournamentName').value,
+                weapon: document.getElementById('weaponType').value,
+                startDate: document.getElementById('startDate').value,
+                description: document.getElementById('description').value,
+                createdAt: new Date().toISOString()
+            };
+            
+            saveData();
+            updateTournamentDisplay();
+            alert('Tournament created successfully!');
+        });
+
+        function updateTournamentDisplay() {
+            if (tournament) {
+                document.getElementById('tournamentNameDisplay').textContent = tournament.name;
+                document.getElementById('weaponTypeDisplay').textContent = tournament.weapon;
+            }
+        }
+
+        // Player Registration
+        document.getElementById('playerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const ign = document.getElementById('playerIGN').value;
+            const characterId = document.getElementById('characterId').value;
+            const photoUrl = document.getElementById('profilePhoto').value || 'https://via.placeholder.com/150';
+            
+            // Check if player already exists
+            if (players.find(p => p.ign === ign || p.characterId === characterId)) {
+                alert('Player with this IGN or Character ID already registered!');
+                return;
+            }
+            
+            const player = {
+                id: Date.now(),
+                ign: ign,
+                characterId: characterId,
+                photo: photoUrl,
+                registeredAt: new Date().toISOString(),
+                stats: {
+                    tournamentsPlayed: 0,
+                    tournamentsWon: 0,
+                    matchesWon: 0,
+                    matchesLost: 0,
+                    winRate: 0
+                },
+                matchHistory: []
+            };
+            
+            players.push(player);
+            saveData();
+            updatePlayersDisplay();
+            updateProfileSelect();
+            
+            // Clear form
+            document.getElementById('playerForm').reset();
+        });
+
+        function deregisterPlayer(playerId) {
+            players = players.filter(p => p.id !== playerId);
+            saveData();
+            updatePlayersDisplay();
+            updateProfileSelect();
+        }
+
+        function updatePlayersDisplay() {
+            const playersList = document.getElementById('playersList');
+            const playerCount = document.getElementById('playerCountDisplay');
+            
+            playerCount.textContent = players.length;
+            
+            if (players.length === 0) {
+                playersList.innerHTML = '<p style="text-align: center; color: #666;">No players registered yet.</p>';
+                return;
+            }
+            
+            playersList.innerHTML = players.map(player => `
+                <div class="player-card">
+                    <img src="${player.photo}" alt="${player.ign}" class="player-avatar" onerror="this.src='https://via.placeholder.com/50'">
+                    <div class="player-info">
+                        <div class="player-ign">${player.ign}</div>
+                        <div class="player-id">ID: ${player.characterId}</div>
+                    </div>
+                    <button onclick="deregisterPlayer(${player.id})" class="btn btn-danger" style="font-size: 0.8rem; padding: 0.5rem;">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        // Bracket Generation
+        function generateBracket() {
+            if (players.length < 2) {
+                alert('Need at least 2 players to generate bracket!');
+                return;
+            }
+            
+            matches = [];
+            bracket = [];
+            
+            // Shuffle players for random seeding
+            const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+            
+            // Calculate rounds needed
+            const totalPlayers = shuffledPlayers.length;
+            const rounds = Math.ceil(Math.log2(totalPlayers));
+            
+            // Initialize bracket structure
+            for (let i = 0; i < rounds; i++) {
+                bracket[i] = [];
+            }
+            
+            // First round setup
+            const firstRoundMatches = Math.ceil(totalPlayers / 2);
+            
+            for (let i = 0; i < firstRoundMatches; i++) {
+                const player1 = shuffledPlayers[i * 2];
+                const player2 = shuffledPlayers[i * 2 + 1];
+                
+                const match = {
+                    id: Date.now() + i,
+                    round: 0,
+                    matchNumber: i + 1,
+                    player1: player1 || null,
+                    player2: player2 || null,
+                    winner: null,
+                    results: [null, null, null], // Best of 3
+                    completed: false,
+                    isBye: !player2
+                };
+                
+                // If it's a bye, automatically advance the player
+                if (!player2) {
+                    match.winner = player1;
+                    match.completed = true;
+                }
+                
+                matches.push(match);
+                bracket[0].push(match);
+            }
+            
+            // Create subsequent rounds
+            for (let round = 1; round < rounds; round++) {
+                const prevRoundMatches = bracket[round - 1].length;
+                const currentRoundMatches = Math.ceil(prevRoundMatches / 2);
+                
+                for (let i = 0; i < currentRoundMatches; i++) {
+                    const match = {
+                        id: Date.now() + round * 1000 + i,
+                        round: round,
+                        matchNumber: i + 1,
+                        player1: null,
+                        player2: null,
+                        winner: null,
+                        results: [null, null, null],
+                        completed: false,
+                        isBye: false
+                    };
+                    
+                    matches.push(match);
+                    bracket[round].push(match);
+                }
+            }
+            
+            saveData();
+            updateBracketDisplay();
+            updateAdminPanel();
+            document.getElementById('tournamentStatusDisplay').textContent = 'In Progress';
+        }
+
+        function updateBracketDisplay() {
+            const bracketDisplay = document.getElementById('bracketDisplay');
+            
+            if (bracket.length === 0) {
+                bracketDisplay.innerHTML = '<p style="text-align: center;">Generate bracket first by registering players.</p>';
+                return;
+            }
+            
+            const roundNames = ['First Round', 'Quarter Finals', 'Semi Finals', 'Finals', 'Winner'];
+            
+            bracketDisplay.innerHTML = `
+                <div class="bracket">
+                    ${bracket.map((round, roundIndex) => `
+                        <div class="bracket-round">
+                            <h3>${roundNames[roundIndex] || `Round ${roundIndex + 1}`}</h3>
+                            ${round.map(match => `
+                                <div class="match">
+                                    <div class="match-header">Match ${match.matchNumber}</div>
+                                    ${match.player1 ? `
+                                        <div class="player-slot ${match.winner && match.winner.id === match.player1.id ? 'winner' : match.completed ? 'loser' : ''} ${match.isBye ? 'bye' : ''}">
+                                            <img src="${match.player1.photo}" alt="${match.player1.ign}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 0.5rem;" onerror="this.src='https://via.placeholder.com/30'">
+                                            ${match.player1.ign}
+                                        </div>
+                                    ` : '<div class="player-slot">TBD</div>'}
+                                    
+                                    ${match.player2 ? `
+                                        <div class="player-slot ${match.winner && match.winner.id === match.player2.id ? 'winner' : match.completed ? 'loser' : ''}">
+                                            <img src="${match.player2.photo}" alt="${match.player2.ign}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 0.5rem;" onerror="this.src='https://via.placeholder.com/30'">
+                                            ${match.player2.ign}
+                                        </div>
+                                    ` : match.isBye ? '<div class="player-slot bye">BYE</div>' : '<div class="player-slot">TBD</div>'}
+                                    
+                                    ${match.completed && !match.isBye ? `
+                                        <div class="match-results">
+                                            ${match.results.map((result, gameIndex) => 
+                                                result ? `<div class="game-result ${result === match.winner.id ? 'win' : 'loss'}">G${gameIndex + 1}</div>` : '<div class="game-result">-</div>'
+                                            ).join('')}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Admin Panel
+        function updateAdminPanel() {
+            const adminMatches = document.getElementById('adminMatches');
+            const incompleteMatches = matches.filter(m => !m.completed && m.player1 && m.player2);
+            
+            if (incompleteMatches.length === 0) {
+                adminMatches.innerHTML = '<p style="text-align: center;">No active matches to manage.</p>';
+                return;
+            }
+            
+            adminMatches.innerHTML = incompleteMatches.map(match => `
+                <div class="match-editor">
+                    <h3>Round ${match.round + 1} - Match ${match.matchNumber}</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <img src="${match.player1.photo}" alt="${match.player1.ign}" style="width: 40px; height: 40px; border-radius: 50%;" onerror="this.src='https://via.placeholder.com/40'">
+                            <span>${match.player1.ign}</span>
+                        </div>
+                        <span style="font-size: 1.5rem; color: #ff6b35;">VS</span>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span>${match.player2.ign}</span>
+                            <img src="${match.player2.photo}" alt="${match.player2.ign}" style="width: 40px; height: 40px; border-radius: 50%;" onerror="this.src='https://via.placeholder.com/40'">
+                        </div>
+                    </div>
+                    <button onclick="openMatchModal(${match.id})" class="btn btn-primary">Edit Results</button>
+                </div>
+            `).join('');
+        }
+
+        function openMatchModal(matchId) {
+            currentEditMatch = matches.find(m => m.id === matchId);
+            const modal = document.getElementById('matchModal');
+            const editor = document.getElementById('matchEditor');
+            
+            editor.innerHTML = `
+                <h3>${currentEditMatch.player1.ign} vs ${currentEditMatch.player2.ign}</h3>
+                <div style="margin: 1rem 0;">
+                    <h4>Best of 3 Results:</h4>
+                    ${[1, 2, 3].map(game => `
+                        <div style="margin: 0.5rem 0;">
+                            <label>Game ${game} Winner:</label>
+                            <select id="game${game}Winner" style="margin-left: 1rem;">
+                                <option value="">Not Played</option>
+                                <option value="${currentEditMatch.player1.id}" ${currentEditMatch.results[game-1] === currentEditMatch.player1.id ? 'selected' : ''}>${currentEditMatch.player1.ign}</option>
+                                <option value="${currentEditMatch.player2.id}" ${currentEditMatch.results[game-1] === currentEditMatch.player2.id ? 'selected' : ''}>${currentEditMatch.player2.ign}</option>
+                            </select>
+                        </div>
+                    `).join('')}
+                </div>
+                <button onclick="saveMatchResults()" class="btn btn-primary">Save Results</button>
+                <button onclick="closeMatchModal()" class="btn btn-secondary">Cancel</button>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeMatchModal() {
+            document.getElementById('matchModal').style.display = 'none';
+            currentEditMatch = null;
+        }
+
+        function saveMatchResults() {
+            const game1Winner = document.getElementById('game1Winner').value;
+            const game2Winner = document.getElementById('game2Winner').value;
+            const game3Winner = document.getElementById('game3Winner').value;
+            
+            currentEditMatch.results = [
+                game1Winner || null,
+                game2Winner || null,
+                game3Winner || null
+            ];
+            
+            // Determine overall winner (best of 3)
+            const player1Wins = currentEditMatch.results.filter(r => r === currentEditMatch.player1.id.toString()).length;
+            const player2Wins = currentEditMatch.results.filter(r => r === currentEditMatch.player2.id.toString()).length;
+            
+            if (player1Wins >= 2) {
+                currentEditMatch.winner = currentEditMatch.player1;
+                currentEditMatch.completed = true;
+            } else if (player2Wins >= 2) {
+                currentEditMatch.winner = currentEditMatch.player2;
+                currentEditMatch.completed = true;
+            } else {
+                currentEditMatch.winner = null;
+                currentEditMatch.completed = false;
+            }
+            
+            // If match is completed, advance winner to next round
+            if (currentEditMatch.completed) {
+                advanceWinner(currentEditMatch);
+                updatePlayerStats(currentEditMatch);
+            }
+            
+            saveData();
+            updateBracketDisplay();
+            updateAdminPanel();
+            closeMatchModal();
+            
+            // Check if tournament is complete
+            checkTournamentComplete();
+        }
+
+        function advanceWinner(completedMatch) {
+            const nextRound = completedMatch.round + 1;
+            const nextMatchIndex = Math.floor((completedMatch.matchNumber - 1) / 2);
+            
+            if (bracket[nextRound] && bracket[nextRound][nextMatchIndex]) {
+                const nextMatch = bracket[nextRound][nextMatchIndex];
+                
+                // Determine if winner goes to player1 or player2 slot
+                if ((completedMatch.matchNumber - 1) % 2 === 0) {
+                    nextMatch.player1 = completedMatch.winner;
+                } else {
+                    nextMatch.player2 = completedMatch.winner;
+                }
+            }
+        }
+
+        function updatePlayerStats(completedMatch) {
+            const winner = completedMatch.winner;
+            const loser = completedMatch.player1.id === winner.id ? completedMatch.player2 : completedMatch.player1;
+            
+            // Update winner stats
+            const winnerData = players.find(p => p.id === winner.id);
+            if (winnerData) {
+                winnerData.stats.matchesWon++;
+                winnerData.matchHistory.push({
+                    opponent: loser.ign,
+                    result: 'win',
+                    tournament: tournament.name,
+                    weapon: tournament.weapon,
+                    date: new Date().toISOString(),
+                    games: completedMatch.results
+                });
+                winnerData.stats.winRate = Math.round((winnerData.stats.matchesWon / (winnerData.stats.matchesWon + winnerData.stats.matchesLost)) * 100);
+            }
+            
+            // Update loser stats
+            const loserData = players.find(p => p.id === loser.id);
+            if (loserData) {
+                loserData.stats.matchesLost++;
+                loserData.matchHistory.push({
+                    opponent: winner.ign,
+                    result: 'loss',
+                    tournament: tournament.name,
+                    weapon: tournament.weapon,
+                    date: new Date().toISOString(),
+                    games: completedMatch.results
+                });
+                loserData.stats.winRate = Math.round((loserData.stats.matchesWon / (loserData.stats.matchesWon + loserData.stats.matchesLost)) * 100);
+            }
+        }
+
+        function checkTournamentComplete() {
+            const finalMatch = bracket[bracket.length - 1][0];
+            if (finalMatch && finalMatch.completed) {
+                // Tournament is complete
+                const champion = finalMatch.winner;
+                const championData = players.find(p => p.id === champion.id);
+                if (championData) {
+                    championData.stats.tournamentsWon++;
+                }
+                
+                // Update all players' tournaments played
+                players.forEach(player => {
+                    if (player.matchHistory.some(h => h.tournament === tournament.name)) {
+                        player.stats.tournamentsPlayed++;
+                    }
+                });
+                
+                document.getElementById('tournamentStatusDisplay').textContent = 'Completed';
+                alert(`🏆 Tournament Complete! Champion: ${champion.ign} 🏆`);
+                saveData();
+            }
+        }
+
+        // Player Profiles
+        function updateProfileSelect() {
+            const select = document.getElementById('playerSelect');
+            select.innerHTML = '<option value="">Select a player...</option>' + 
+                players.map(player => `<option value="${player.id}">${player.ign}</option>`).join('');
+        }
+
+        function showPlayerProfile() {
+            const playerId = parseInt(document.getElementById('playerSelect').value);
+            const player = players.find(p => p.id === playerId);
+            const display = document.getElementById('playerProfileDisplay');
+            
+            if (!player) {
+                display.innerHTML = '';
+                return;
+            }
+            
+            display.innerHTML = `
+                <div class="profile-header">
+                    <img src="${player.photo}" alt="${player.ign}" class="profile-avatar" onerror="this.src='https://via.placeholder.com/120'">
+                    <h2>${player.ign}</h2>
+                    <p>Character ID: ${player.characterId}</p>
+                    <p>Registered: ${new Date(player.registeredAt).toLocaleDateString()}</p>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">${player.stats.tournamentsPlayed}</div>
+                        <div>Tournaments Played</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${player.stats.tournamentsWon}</div>
+                        <div>Tournaments Won</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${player.stats.matchesWon}</div>
+                        <div>Matches Won</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${player.stats.matchesLost}</div>
+                        <div>Matches Lost</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${player.stats.winRate || 0}%</div>
+                        <div>Win Rate</div>
+                    </div>
+                </div>
+                
+                <div class="match-history">
+                    <h3>Match History</h3>
+                    ${player.matchHistory.length === 0 ? 
+                        '<p>No match history yet.</p>' : 
+                        player.matchHistory.slice(-10).reverse().map(match => `
+                            <div class="history-item">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <strong>${match.result.toUpperCase()}</strong> vs ${match.opponent}
+                                        <br>
+                                        <small>${match.tournament} (${match.weapon})</small>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="font-size: 0.9rem;">
+                                            Games: ${match.games.map((g, i) => 
+                                                g ? (g == player.id ? 'W' : 'L') : '-'
+                                            ).join('-')}
+                                        </div>
+                                        <small>${new Date(match.date).toLocaleDateString()}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')
+                    }
+                </div>
+            `;
+        }
+
+        // Utility Functions
+        function resetTournament() {
+            if (confirm('Are you sure you want to reset the entire tournament? This cannot be undone.')) {
+                tournament = null;
+                players = [];
+                matches = [];
+                bracket = [];
+                
+                localStorage.removeItem('pubgTournament');
+                localStorage.removeItem('pubgPlayers');
+                localStorage.removeItem('pubgMatches');
+                
+                // Reset displays
+                updateTournamentDisplay();
+                updatePlayersDisplay();
+                updateProfileSelect();
+                document.getElementById('bracketDisplay').innerHTML = '';
+                document.getElementById('adminMatches').innerHTML = '';
+                document.getElementById('playerProfileDisplay').innerHTML = '';
+                document.getElementById('tournamentStatusDisplay').textContent = 'Setup';
+                
+                alert('Tournament reset successfully!');
+            }
+        }
+
+        function exportData() {
+            const data = {
+                tournament: tournament,
+                players: players,
+                matches: matches,
+                bracket: bracket,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `pubg-tournament-${tournament ? tournament.name.replace(/\s+/g, '-') : 'data'}-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('matchModal');
+            if (event.target === modal) {
+                closeMatchModal();
+            }
+        }
+    </script>
+</body>
+</html>
